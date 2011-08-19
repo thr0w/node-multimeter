@@ -1,6 +1,6 @@
 {
     "name" : "multimeter",
-    "version" : "0.0.0",
+    "version" : "0.0.1",
     "description" : "render multiple progress bars at once on the terminal",
     "main" : "index.js",
     "directories" : {
