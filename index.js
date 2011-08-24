@@ -20,8 +20,8 @@ var exports = module.exports = function (c) {
         }
         if (!params) params = {};
         
-        if (x === undefined) throw new Error('x is undefined');
-        if (y === undefined) throw new Error('y is undefined');
+        if (x === undefined) x = '+0';
+        if (y === undefined) y = '+0';
         
         return new Bar(charm, x, y, params);
     };
