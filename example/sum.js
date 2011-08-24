@@ -3,6 +3,7 @@ var multimeter = require('multimeter');
 var multi = multimeter(process);
 var charm = multi.charm;
 charm.on('^C', process.exit);
+charm.reset();
 
 var xs = [];
 for (var i = 0; i < 100; i++) xs.push(i);
