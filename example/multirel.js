@@ -1,9 +1,8 @@
-var multimeter = require('../');
+var multimeter = require('multimeter');
 
 var multi = multimeter(process);
 multi.on('^C', process.exit);
-//multi.charm.reset();
-    
+
 var bars = [];
 var progress = [];
 var deltas = [];
@@ -14,7 +13,7 @@ for (var i = 0; i < 5; i++) {
     var s = 'ABCDE'[i] + ': \n';
     multi.write(s);
     
-    var bar = multi(4, '-' + i, {
+    var bar = multi.rel(4, i, {
         width : 20,
         solid : {
             text : '|',

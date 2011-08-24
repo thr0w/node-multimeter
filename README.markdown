@@ -48,6 +48,14 @@ Create a new progress bar at `(x,y)` with `params` which default to:
 * solid : { background : 'blue', foreground : 'white', text : '|' }
 * empty : { background : null, foreground : null, text : ' ' }
 
+If `y` is negative or `'-0'` it will be treated as a relative coordinate.
+
+var bar = multi.rel(x, y, params)
+---------------------------------
+
+Create a new progress bar at an absolute `x` and relative `y` coordinate with
+respect to the present `multi.offset`.
+
 multi.drop(params, cb)
 ----------------------
 
@@ -58,6 +66,14 @@ multi.on(...), multi.removeListener(...), multi.destroy(...), multi.write(...)
 ------------------------------------------------------------------------------
 
 Call event emitter functions on the underlying `charm` object.
+
+multi.offset
+------------
+
+This getter/setter controls the positioning for relative progress bars.
+
+Increment this value whenever you write a newline to the stream to prevent the
+pending progress bars from drifting down from their original positions.
 
 bar.percent(p, msg=p + ' %')
 ----------------------------

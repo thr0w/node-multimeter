@@ -33,6 +33,10 @@ var exports = module.exports = function (c) {
     };
     multi.bars = [];
     
+    multi.rel = function (x, y, params) {
+        return multi(x, '-' + y, params);
+    };
+    
     multi.drop = function (params, cb) {
         if (!cb) { cb = params; params = {} }
         
