@@ -25,6 +25,7 @@ var exports = module.exports = function (c) {
         
         var bar = new Bar(charm, x, y, params);
         multi.bars.push(bar);
+        bar.offset = multi.offset;
         multi.on('offset', function (o) {
             bar.offset = o;
         });
