@@ -23,24 +23,48 @@ var exports = module.exports = function (c) {
         if (x === undefined) x = '+0';
         if (y === undefined) y = '+0';
         
-        return new Bar(charm, x, y, params);
+        var bar = new Bar(charm, x, y, params);
+        multi.bars.push(bar);
+        multi.on('offset', function (o) {
+            bar.offset = o;
+        });
+        return bar;
     };
+    multi.bars = [];
     
     multi.drop = function (params, cb) {
         if (!cb) { cb = params; params = {} }
         
         charm.position(function (x, y) {
             var bar = new Bar(charm, x, y, params);
+            multi.bars.push(bar);
+            multi.on('offset', function (o) {
+                bar.offset = o;
+            });
             cb(bar);
         });
     };
     
     multi.charm = charm;
     multi.destroy = charm.destroy.bind(charm);
-    multi.write = charm.write.bind(charm);
     
     multi.on = charm.on.bind(charm);
+    multi.emit = charm.emit.bind(charm);
     multi.removeListener = charm.removeListener.bind(charm);
+    multi.write = charm.write.bind(charm);
+    
+    (function () {
+        var offset = 0;
+        Object.defineProperty(multi, 'offset', {
+            set : function (o) {
+                offset = o;
+                multi.emit('offset', o);
+            },
+            get : function () {
+                return offset;
+            }
+        });
+    })();
     
     return multi;
 };

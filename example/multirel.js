@@ -1,4 +1,4 @@
-var multimeter = require('multimeter');
+var multimeter = require('../');
 
 var multi = multimeter(process);
 multi.on('^C', process.exit);
@@ -14,7 +14,7 @@ for (var i = 0; i < 5; i++) {
     var s = 'ABCDE'[i] + ': \n';
     multi.write(s);
     
-    var bar = multi(3, -i-2, {
+    var bar = multi(4, '-' + i, {
         width : 20,
         solid : {
             text : '|',
@@ -29,7 +29,13 @@ for (var i = 0; i < 5; i++) {
     progress.push(0);
 }
 
-multi.write('\nbeep boop');
+multi.offset += 2;
+multi.write('\nbeep');
+
+setTimeout(function () {
+    multi.offset ++;
+    multi.write('\n    boop');
+}, 2000);
 
 var pending = progress.length;
 var iv = setInterval(function () {
